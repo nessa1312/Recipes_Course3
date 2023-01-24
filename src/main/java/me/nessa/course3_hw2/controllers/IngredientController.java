@@ -3,7 +3,7 @@ package me.nessa.course3_hw2.controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import me.nessa.course3_hw2.model.Ingredients;
-import me.nessa.course3_hw2.services.impl.IngredientService;
+import me.nessa.course3_hw2.services.IngredientService;
 
 @RestController
 @RequestMapping("/ingredients")

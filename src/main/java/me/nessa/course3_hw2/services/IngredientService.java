@@ -10,4 +10,8 @@ public interface IngredientService {
     void addIngredient(Ingredients ingredient);
 
     void obtainIngredient(int number);
+
+    void editIngredient(int id, Ingredients ingredient);
+
+    void deleteIngredient(int id);
 }
