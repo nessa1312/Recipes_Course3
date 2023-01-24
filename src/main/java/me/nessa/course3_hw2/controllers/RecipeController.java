@@ -1,15 +1,12 @@
 package me.nessa.course3_hw2.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import me.nessa.course3_hw2.model.Recipe;
 import me.nessa.course3_hw2.services.RecipeService;
 
-import java.util.ArrayList;
-
 @RestController
-@RequestMapping("/add")
+@RequestMapping("/recipe")
 public class RecipeController {
 
     private final RecipeService recipeService;
@@ -17,11 +14,22 @@ public class RecipeController {
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
-    Recipe recipe = new Recipe("Глазунья", 10, new ArrayList<>(), new ArrayList<>());
 
-    @GetMapping("/recipe")
-    public Recipe addRecipe() {
+    @PostMapping("/add")
+    public ResponseEntity<Recipe> addRecipe(@RequestBody Recipe recipe) {
         recipeService.addRecipe(recipe);
-        return recipeService.obtainRecipe(0);
+        return ResponseEntity.ok(recipe);
+    }
+
+    @PostMapping("/edit/{id}")
+    public ResponseEntity<Recipe> editRecipe (@PathVariable int id, @RequestBody Recipe recipe) {
+        recipeService.editRecipe(id, recipe);
+        return ResponseEntity.ok().body(recipe);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Recipe> deleteRecipe(@PathVariable int id) {
+        recipeService.deleteRecipe(id);
+        return ResponseEntity.ok().build();
     }
 }

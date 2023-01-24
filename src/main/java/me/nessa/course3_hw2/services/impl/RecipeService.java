@@ -1,22 +1,17 @@
 package me.nessa.course3_hw2.services.impl;
 
-import org.springframework.stereotype.Service;
 import  me.nessa.course3_hw2.model.Recipe;
 
-import java.util.HashMap;
-import java.util.Map;
-@Service
-public class RecipeService implements me.nessa.course3_hw2.services.RecipeService {
+import java.util.List;
 
-    Map<Integer, Recipe> recipeMap = new HashMap<>();
+public interface RecipeService {
+    void addRecipe(Recipe recipe);
 
-    static int counter = 0;
-    @Override
-    public void addRecipe(Recipe recipe) {
-        recipeMap.put(counter++, recipe);
-    }
-    @Override
-    public Recipe obtainRecipe(int number) {
-        return recipeMap.get(number);
-    }
+    Recipe obtainRecipe(int number);
+
+    void deleteRecipe(int counter);
+
+    List<Recipe> obtainAllRecipe();
+
+    void editRecipe(int id, Recipe newRecipe);
 }
