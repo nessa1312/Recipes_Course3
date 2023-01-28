@@ -12,6 +12,7 @@ import me.nessa.course3_hw2.services.IngredientService;
 import javax.validation.Valid;
 
 @RestController
+@RequestMapping("/ingredients")
 @Tag(name = "Констроллер ингредиентов", description = "CRUD-опреции для работы с ингредиентами")
 public class IngredientController {
     private final IngredientService ingredientService;
