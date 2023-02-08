@@ -5,12 +5,20 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import me.nessa.course3_hw2.model.Recipe;
 import me.nessa.course3_hw2.services.RecipeService;
 
 import javax.validation.Valid;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 @RestController
 @RequestMapping("/recipe")
@@ -49,5 +57,25 @@ public class RecipeController {
     public ResponseEntity<Recipe> deleteRecipe(@PathVariable int id) {
         recipeService.deleteRecipe(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/gettxtfile")
+    public ResponseEntity<Object> getTxtFile() {
+        try {
+            Path path = recipeService.createRecipeTxt();
+            if (Files.size(path) == 0) {
+                return ResponseEntity.noContent().build();
+            }
+            InputStreamResource resource = new InputStreamResource(new FileInputStream(path.toFile()));
+            return ResponseEntity.ok()
+                    .contentType(MediaType.TEXT_PLAIN)
+                    .contentLength(Files.size(path))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"recipeBook.txt\"")
+                    .body(resource);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().body(e.toString());
+        }
+
     }
 }

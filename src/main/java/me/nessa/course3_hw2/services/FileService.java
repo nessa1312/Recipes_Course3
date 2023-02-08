@@ -1,6 +1,7 @@
 package me.nessa.course3_hw2.services;
 
 import java.io.File;
+import java.nio.file.Path;
 
 public interface FileService {
 
@@ -11,4 +12,6 @@ public interface FileService {
     boolean cleanRecipeFile(String fileName);
 
     File getRecipeFile(String fileName);
+
+    Path createTempFile(String suffix);
 }

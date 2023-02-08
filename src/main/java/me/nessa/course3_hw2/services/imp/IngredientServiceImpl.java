@@ -1,8 +1,8 @@
-package me.nessa.course3_hw2.services.impl;
+package me.nessa.course3_hw2.services.imp;
 
-import org.springframework.stereotype.Service;
 import me.nessa.course3_hw2.model.Ingredients;
 import me.nessa.course3_hw2.services.IngredientService;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;

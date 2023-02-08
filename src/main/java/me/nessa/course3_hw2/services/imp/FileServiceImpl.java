@@ -1,4 +1,4 @@
-package me.nessa.course3_hw2.services.impl;
+package me.nessa.course3_hw2.services.imp;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -52,5 +52,14 @@ public class FileServiceImpl implements FileService {
     @Override
     public File getRecipeFile(String fileName) {
         return new File(dataFilePath + "/" + fileName);
+    }
+
+    @Override
+    public Path createTempFile(String suffix) {
+        try {
+            return Files.createTempFile(Path.of(dataFilePath), "tempFile", suffix);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
