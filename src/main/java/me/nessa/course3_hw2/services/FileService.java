@@ -13,5 +13,7 @@ public interface FileService {
 
     File getRecipeFile(String fileName);
 
+    File getIngredientFile(String fileName);
+
     Path createTempFile(String suffix);
 }

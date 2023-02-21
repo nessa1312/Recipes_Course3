@@ -10,10 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import me.nessa.course3_hw2.services.RecipeService;
 
 import java.io.*;
-import java.nio.file.Path;
 
 @RestController
 @RequestMapping("/files")
@@ -29,7 +27,7 @@ public class FilesController {
         this.fileService = fileService;
     }
 
-    @GetMapping(value = "/export")
+    @GetMapping(value = "/export/recipe")
     public ResponseEntity<InputStreamResource> downloadRecipeFile() throws FileNotFoundException {
         File recipeFile = fileService.getRecipeFile(recipeFileName);
 

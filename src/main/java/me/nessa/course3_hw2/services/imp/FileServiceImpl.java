@@ -1,8 +1,9 @@
 package me.nessa.course3_hw2.services.imp;
 
+import me.nessa.course3_hw2.services.FileService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import me.nessa.course3_hw2.services.FileService;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +28,7 @@ public class FileServiceImpl implements FileService {
             return false;
         }
     }
+
     @Override
     public String readFile(String fileName) {
         try {
@@ -49,6 +51,7 @@ public class FileServiceImpl implements FileService {
             return false;
         }
     }
+
     @Override
     public File getRecipeFile(String fileName) {
         return new File(dataFilePath + "/" + fileName);
@@ -61,5 +64,12 @@ public class FileServiceImpl implements FileService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @RequestMapping("/files")
+    public class FilesController {
+        @Value("${name.of.file.one}")
+        private String recipeFileName;
+
     }
 }
