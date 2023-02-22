@@ -3,7 +3,6 @@ package me.nessa.course3_hw2.services.imp;
 import me.nessa.course3_hw2.services.FileService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +15,9 @@ public class FileServiceImpl implements FileService {
 
     @Value("${path.to.file.folder}")
     private String dataFilePath;
+
+    @Value("${name.of.file.one}")
+    private String recipeFileName;
 
     @Override
     public boolean saveToFile(String json, String fileName) {
@@ -58,6 +60,11 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
+    public File getIngredientFile(String fileName) {
+        return null;
+    }
+
+    @Override
     public Path createTempFile(String suffix) {
         try {
             return Files.createTempFile(Path.of(dataFilePath), "tempFile", suffix);
@@ -66,10 +73,4 @@ public class FileServiceImpl implements FileService {
         }
     }
 
-    @RequestMapping("/files")
-    public class FilesController {
-        @Value("${name.of.file.one}")
-        private String recipeFileName;
-
-    }
 }
